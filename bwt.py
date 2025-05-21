@@ -6,9 +6,13 @@ def BWT(string):
 
     for i in string:
         l_string.append(i)
-        
-    sorted_ = sorted(l_string) #розміщуємо в лексикографічному порядку
     
-    return sorted_
+    for j in range(len(l_string)):
+        l_string = [l_string[-1]] + l_string[:-1]
+        matrix.append(l_string[:])
+        
+    return sorted(matrix)
 
-print(BWT('owl'))
+res = BWT('AGGTCAACC$')
+for i in res:
+    print(i)
