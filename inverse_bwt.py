@@ -30,41 +30,51 @@ print(inverse_BWT('AC$GATCTG'))
 
 def better_inverse_BWT(string): 
 
+    #термінальний символ
     symbol = string.index('$')  
 
-    l_string = list(string)
+    #з рядка в список
+    l_string = [] 
+    for i in string:
+        l_string.append(i)
+        
     n = len(l_string)
+    
     sorted_l_string = sorted(l_string)
 
+    #підрахунок появи символів у вхідному рядку(останній стовпчик)
     counts = {}
-    ranks_bwt = []
+    last_row = []
     for i in l_string:
         if i not in counts:
             counts[i] = 0
-        ranks_bwt.append((i, counts[i]))
+        last_row.append((i, counts[i]))
         counts[i] += 1
 
+    #підрахунок появи символів у відсортованому рядку(перший стовпчик)
     counts = {}
-    ranks_sorted = []
+    first_row = []
     for i in sorted_l_string:
         if i not in counts:
             counts[i] = 0
-        ranks_sorted.append((i, counts[i]))
+        first_row.append((i, counts[i]))
         counts[i] += 1
 
+    #побудова масиву T
     T = [0] * n
     for i in range(n):
         for j in range(n):
-            if ranks_bwt[i] == ranks_sorted[j]:
+            if last_row[i] == first_row[j]:
                 T[i] = j
                 break
 
     result = []
-    pos = symbol
-    for _ in range(n):
-        result.append(string[pos])  
-        pos = T[pos]
 
+    for _ in range(n):
+        result.append(string[symbol])  
+        symbol = T[symbol]
+        
+    #для порядку
     return ''.join(reversed(result))
 
 print(better_inverse_BWT('AC$GATCTG'))  
