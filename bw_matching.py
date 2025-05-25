@@ -26,12 +26,17 @@ def LastToFirst(string):
         counts[i] += 1
         
     #словник для швидшого пошуку
-    first_pos = { pair: i for i, pair in enumerate(first_row) }
+    first_pos = {}
+    for i, pair in enumerate(first_row):
+        first_pos[pair] = i
 
     #last_to_first[i] = позиція last_row[i] в first_row
-    last_to_first = [ first_pos[pair] for pair in last_row ]
-
+    last_to_first = []
+    for pair in last_row:
+        last_to_first.append(first_pos[pair])
+        
     return last_to_first
+
 
 
 def BWMatching(string, pat):  
@@ -48,17 +53,20 @@ def BWMatching(string, pat):
             symbol = pat[-1]
             pat = pat[:-1]
 
-            positions = [i for i in range(top, bottom + 1) if string[i] == symbol]
-            if not positions:
+            pos = []
+            for i in range(top, bottom + 1):
+                if string[i] == symbol:
+                    pos.append(i)
+                
+            if not pos:
                 return 0
 
-            top = last_to_first[positions[0]]
-            bottom = last_to_first[positions[-1]]
+            top = last_to_first[pos[0]]
+            bottom = last_to_first[pos[-1]]
         else:
             return bottom - top + 1
 
     return 0
-
 
 
 string = 'AAGGGCGTCGGTGC'
@@ -67,3 +75,20 @@ bw_string = BWT(string)
 
 print(BWMatching(bw_string, pattern))
 
+
+
+def BWMatching_text():
+    
+    with open('input_bwm.txt', 'r') as f:
+        lines = f.read().splitlines()
+        text = lines[0].strip()
+        pattern = lines[1].strip()
+
+    result = BWMatching(text, pattern)
+
+    with open('output_bwm.txt', 'w') as f:
+        f.write(str(result))
+
+
+if __name__ == '__main__':
+    BWMatching_text()
