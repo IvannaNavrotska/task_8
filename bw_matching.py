@@ -1,3 +1,5 @@
+from bwt import BWT
+
 def LastToFirst(string):
 
     l_string = [] 
@@ -30,3 +32,38 @@ def LastToFirst(string):
     last_to_first = [ first_pos[pair] for pair in last_row ]
 
     return last_to_first
+
+
+def BWMatching(string, pat):  
+
+    n = len(string)
+    
+    last_to_first = LastToFirst(string)
+
+    top = 0
+    bottom = n - 1
+
+    while top <= bottom:
+        if pat:
+            symbol = pat[-1]
+            pat = pat[:-1]
+
+            positions = [i for i in range(top, bottom + 1) if string[i] == symbol]
+            if not positions:
+                return 0
+
+            top = last_to_first[positions[0]]
+            bottom = last_to_first[positions[-1]]
+        else:
+            return bottom - top + 1
+
+    return 0
+
+
+
+string = 'AAGGGCGTCGGTGC'
+pattern = 'GG'
+bw_string = BWT(string)
+
+print(BWMatching(bw_string, pattern))
+
