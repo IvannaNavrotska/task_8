@@ -1,3 +1,5 @@
+import time
+
 def inverse_BWT(string):
 
     #з рядка в список
@@ -25,7 +27,7 @@ def inverse_BWT(string):
     
     return result[0]
 
-print(inverse_BWT('AC$GATCTG')) 
+#print(inverse_BWT('AC$GATCTG')) 
 
 
 def better_inverse_BWT(string): 
@@ -77,8 +79,6 @@ def better_inverse_BWT(string):
     #для порядку
     return ''.join(reversed(result))
 
-print(better_inverse_BWT('AC$GATCTG'))
-
 
 
 def inverse_BWT_text():
@@ -93,4 +93,12 @@ def inverse_BWT_text():
 
 
 if __name__ == '__main__':
+
+    start_time = time.perf_counter()
+    
     inverse_BWT_text()
+    
+    end_time = time.perf_counter()
+    time = end_time - start_time
+    print(f'Час виконання: {time:.6f} секунд')
+   

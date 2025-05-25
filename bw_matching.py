@@ -1,4 +1,6 @@
 from bwt import BWT
+import time
+
 
 def LastToFirst(string):
 
@@ -69,13 +71,6 @@ def BWMatching(string, pat):
     return 0
 
 
-string = 'AAGGGCGTCGGTGC'
-pattern = 'GG'
-bw_string = BWT(string)
-
-print(BWMatching(bw_string, pattern))
-
-
 
 def BWMatching_text():
     
@@ -91,4 +86,14 @@ def BWMatching_text():
 
 
 if __name__ == '__main__':
+
+    start_time = time.perf_counter()
+    
     BWMatching_text()
+    
+    end_time = time.perf_counter()
+    time = end_time - start_time
+    print(f'Час виконання: {time:.6f} секунд')
+
+    
+    

@@ -1,3 +1,5 @@
+import time
+
 def BWT(string):
 
     matrix = []
@@ -20,8 +22,6 @@ def BWT(string):
 
     return result
 
-print(BWT('AGGTCAACC$'))
-
 
 def BWT_text():
 
@@ -35,4 +35,12 @@ def BWT_text():
 
 
 if __name__ == '__main__':
+
+    start_time = time.perf_counter()
+    
     BWT_text()
+    
+    end_time = time.perf_counter()
+    time = end_time - start_time
+    print(f'Час виконання: {time:.6f} секунд')
+
