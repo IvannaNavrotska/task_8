@@ -77,4 +77,20 @@ def better_inverse_BWT(string):
     #для порядку
     return ''.join(reversed(result))
 
-print(better_inverse_BWT('AC$GATCTG'))  
+print(better_inverse_BWT('AC$GATCTG'))
+
+
+
+def inverse_BWT_text():
+
+    with open('input_inverse.txt', 'r') as f:
+        text = f.read().strip()
+        
+    result = better_inverse_BWT(text)
+
+    with open('output_inverse.txt', 'w') as f:
+        f.write(result)
+
+
+if __name__ == '__main__':
+    inverse_BWT_text()
